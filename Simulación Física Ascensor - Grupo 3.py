@@ -9,9 +9,9 @@
 
 """
 
-"""
-Cambie los parámetros y variables de estado de forma realista. Todos los cálculos se realizarán en tiempo real.
-"""
+####
+"""Cambie los parámetros y variables de estado de forma realista. Todos los cálculos se realizarán en tiempo real."""
+####
 
 # Parámetros iniciales
 masa_cabina = 100  # Masa de la cabina en kg
@@ -24,7 +24,8 @@ fuerza_base = 150  # Fuerza base del motor en N
 limite_velocidad = 2  # Límite de velocidad en m/s
 coef_frenado = 0.1  # Coeficiente de frenado gradual
 paso_tiempo = 0.1  # Paso de tiempo en segundos
-num_poleas = 2  # Número de poleas
+num_poleas = 1  # Número de poleas
+
 radio_polea = 0.2  # Radio de la polea en metros
 direccion = "bajar"  # Subida o bajada
 motor_activo = True  # Estado inicial del motor
@@ -32,11 +33,21 @@ limite_torque = 100  # Límite de torque en Nm
 limite_potencia = 0  # Límite de potencia en W
 
 # Variables de estado
-pos_cabina = 0.5  # Posición inicial de la cabina en metros
+pos_cabina = 0  # Posición inicial de la cabina en metros
 vel_cabina = 0  # Velocidad inicial de la cabina en m/s
 acel_cabina = 0  # Aceleración inicial de la cabina en m/s²
 potencia_motor = 0  # Potencia inicial del motor
 torque_motor = 0  # Torque inicial del motor
+
+# Verificar paso de tiempo
+if paso_tiempo <= 0:
+    print("Advertencia: El paso de tiempo no puede ser menor o igual a cero. Se ha establecido en 1 segundo por defecto.")
+    paso_tiempo = 1  # Asignar un valor por defecto
+
+# Verificar número de poleas
+if not isinstance(num_poleas, int) or num_poleas <= 0:
+    print("Advertencia: El número de poleas no puede ser menor o igual a cero ni un número decimal. Se ha establecido en 1 por defecto.")
+    num_poleas = 1  # Asignar un valor por defecto
 
 # Función para calcular la fuerza del motor, considerando la carga, contrapeso y poleas
 def aplicar_fuerza_motor(pos_cabina, vel_cabina, direccion):
