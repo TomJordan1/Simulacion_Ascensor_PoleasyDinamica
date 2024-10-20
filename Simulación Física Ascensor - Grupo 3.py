@@ -30,7 +30,7 @@ radio_polea = 0.2  # Radio de la polea en metros
 direccion = "bajar"  # Subida o bajada
 motor_activo = True  # Estado inicial del motor
 limite_torque = 100  # Límite de torque en Nm
-limite_potencia = 0  # Límite de potencia en W
+limite_potencia = 150  # Límite de potencia en W
 
 # Variables de estado
 pos_cabina = 0  # Posición inicial de la cabina en metros
