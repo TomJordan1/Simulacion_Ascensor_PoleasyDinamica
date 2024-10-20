@@ -1,7 +1,7 @@
 # Simulacion_Ascensor_PoleasyDinamica
 
-Proyecto de Física 1 (BFI01-F) Ciclo 2024-2
-#### Ciclo: 2024 - 2 🤺
+### Proyecto de Física 1 (BFI01-F) 
+### Ciclo: 2024 - 2 🤺
 <br></br>
 <center>
   <a  href="https://www.uni.edu.pe/">
