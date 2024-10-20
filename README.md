@@ -7,7 +7,6 @@ Proyecto de Física 1 (BFI01-F) Ciclo 2024-2
   <a  href="https://www.uni.edu.pe/">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Uni-logo_transparente_granate.png/191px-Uni-logo_transparente_granate.png"></img>
   </a>
-
 </center>
 
 <br></br>
