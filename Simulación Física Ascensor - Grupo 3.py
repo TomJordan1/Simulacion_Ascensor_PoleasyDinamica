@@ -9,6 +9,10 @@
 
 """
 
+"""
+Cambie los parámetros y variables de estado de forma realista. Todos los cálculos se realizarán en tiempo real.
+"""
+
 # Parámetros iniciales
 masa_cabina = 100  # Masa de la cabina en kg
 masa_carga = 50  # Masa de la carga en kg (peso de los pasajeros)
@@ -57,12 +61,12 @@ def aplicar_fuerza_motor(pos_cabina, vel_cabina, direccion):
     else:
         return fuerza_aplicada  # Fuerza del motor según la dirección
 
-# Simulación
+### Simulación
 
 tiempo_simulacion = 10  # Tiempo total de la simulación en segundos
-pasos = int(tiempo_simulacion / paso_tiempo)  # Número de pasos de la simulación
+n = int(tiempo_simulacion / paso_tiempo)  # Número de pasos de la simulación
 
-for paso in range(100):  # Simular 100 pasos de tiempo
+for paso in range(n):  # Simular "n" pasos de tiempo
     pos_cabina_prev = pos_cabina  # Guardar posición anterior para cálculo de velocidad
 
     # Calcular la fuerza del motor en este paso
@@ -113,7 +117,6 @@ for paso in range(100):  # Simular 100 pasos de tiempo
         if respuesta == "sí":
             direccion = "bajar"
             print("*** Cambiando dirección: Subiendo")
-            
         else:
             break
     elif pos_cabina <= altura_min and direccion == "bajar":
@@ -129,3 +132,6 @@ for paso in range(100):  # Simular 100 pasos de tiempo
         print(f"  *** Frenado... Velocidad excedida: {vel_cabina:.2f} m/s")
 
 print("Simulación completada.")
+
+
+# :)
