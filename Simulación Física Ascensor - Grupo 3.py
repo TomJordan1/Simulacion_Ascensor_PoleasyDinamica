@@ -2,7 +2,7 @@
 
 ---Simulación de ascensor accesible basado en poleas y principios de dinámica---
 
-                    Proyecto de Física 1 - Grupo 3
+                    Proyecto de Física 1 - Grupo 2
                             Ciclo: 2024-2
                             
     Universidad Nacional de Ingeniería - Facultad de Ingeniería Ambiental
