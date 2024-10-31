@@ -94,7 +94,7 @@ for paso in range(n):  # Simular "n" pasos de tiempo
         
     # Actualizar la velocidad y posición de la cabina
     vel_cabina = vel_cabina + acel_cabina * paso_tiempo  # Velocidad
-    pos_cabina = pos_cabina + vel_cabina * paso_tiempo  # Posición
+    pos_cabina = pos_cabina + vel_cabina * paso_tiempo + 0.5 * acel_cabina * paso_tiempo * paso_tiempo  # Posición
 
     # Respetar los límites de altura
     if pos_cabina > altura_max:
