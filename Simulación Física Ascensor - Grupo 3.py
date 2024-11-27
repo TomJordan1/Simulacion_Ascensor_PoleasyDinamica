@@ -38,6 +38,7 @@ R2 = 0.45  # radio de la polea sin motor (m)
 I1 = 0.5 * mR1 * R1**2  # momento de inercia de la polea 1 (kg*m^2)
 I2 = 0.5 * mR2 * R2**2  # momento de inercia de la polea 2 (kg*m^2)
 g = 9.81  # aceleración de la gravedad (m/s^2)
+eficiencia_real = 0.8 # Eficiencia del motor
 t_max = 4  # tiempo máximo de simulación (s)
 
 # Función para calcular la aceleración del sistema
@@ -65,7 +66,7 @@ def calcular_torque_motor_corregido(m_cabina, R1, I1, a, g):
 
 # Función para calcular la potencia del motor
 def calcular_potencia_motor(torque_motor, velocidad_angular):
-    return torque_motor * velocidad_angular
+    return torque_motor * velocidad_angular * eficiencia_real
 
 # Cálculos
 a = calcular_aceleracion(m_cabina, m_contrapeso, g, I1, I2, R1, R2)
@@ -82,7 +83,7 @@ potencias = [calcular_potencia_motor(torque_motor, omega) for omega in omega1_ti
 # Cálculo de la velocidad media y potencia basada en ella
 v_media = velocidades[-1] / 2  # Si la velocidad inicial es 0, la velocidad media es la mitad de la final
 omega_media = v_media / R1  # Velocidad angular media de la polea conectada al motor
-potencia_media = torque_motor * omega_media  # Potencia del motor basada en la velocidad media
+potencia_media = torque_motor * omega_media * eficiencia_real # Potencia del motor basada en la velocidad media
 
 # Mostrar resultados
 print("Aceleración del sistema: {:.2f} m/s^2".format(a))
