@@ -28,23 +28,34 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Parámetros del sistema
-m_cabina = 500  # masa de la cabina (kg)
+m_cabina = 550  # masa de la cabina (kg)
 m_carga_util = 300 # masa que puede soportar la cabina (kg)
+m_total = m_cabina + m_carga_util # masa total suponiendo toda la carga útil (kg)
 m_contrapeso = m_cabina + m_carga_util / 2  # masa del contrapeso (kg)
 mR1 = 8 # masa de la polea 1 (kg)
 mR2 = 10 # masa de la polea 2 (kg)
-R1 = 0.32  # radio de la polea conectada al motor (m)
-R2 = 0.45  # radio de la polea sin motor (m)
+R1 = 0.32/2  # radio de la polea conectada al motor (m)
+R2 = 0.45/2  # radio de la polea sin motor (m)
 I1 = 0.5 * mR1 * R1**2  # momento de inercia de la polea 1 (kg*m^2)
 I2 = 0.5 * mR2 * R2**2  # momento de inercia de la polea 2 (kg*m^2)
 g = 9.81  # aceleración de la gravedad (m/s^2)
 eficiencia_real = 0.8 # Eficiencia del motor
-t_max = 4  # tiempo máximo de simulación (s)
+t_max = 0 # tiempo máximo de simulación (s)
+h_max = 10.292 # altura máxima alcanzada por la simulación (m)
+a = 0.5 # aceleración aceptable del sistema
+v0 = 0  # velocidad inicial (m/s)
+x0 = 0  # posición inicial (m)
 
 # Función para calcular la aceleración del sistema
-def calcular_aceleracion(m_cabina, m_contrapeso, g, I1, I2, R1, R2):
-    a = ((m_contrapeso - m_cabina)*g*R2) / ((m_cabina + m_contrapeso)*R2 + (I2 / R2**2))
+def calcular_aceleracion(a):
     return a
+
+# Función para calcular el tiempo necesario para recorrer una distancia
+def calcular_tiempo(a, h_max):
+
+    t_max = np.sqrt((2 * h_max) / a)
+    
+    return t_max
 
 # Función para calcular la velocidad en función del tiempo
 def calcular_velocidad_tiempo(v0, a, t):
@@ -52,28 +63,18 @@ def calcular_velocidad_tiempo(v0, a, t):
 
 # Función para calcular la posición en función del tiempo
 def calcular_posicion_tiempo(x0, v0, a, t):
-    return x0 + v0 * t + 0.5 * a * t**2
+    return v0*t + 0.5 * a * t**2
 
 # Función para calcular el torque requerido por el motor
 def calcular_torque_motor_corregido(m_cabina, R1, I1, a, g):
-    torque_motor = m_cabina * R1 * (g - a) + (I1 / R1) * a
-    return torque_motor
-
-# Función para calcular la velocidad angular
-def calcular_torque_motor_corregido(m_cabina, R1, I1, a, g):
-    torque_motor = m_cabina * R1 * (g - a) + (I1 / R1) * a
+    torque_motor = (a * (m_total - I1/(R1**2) - I2/(R2**2)) - (m_contrapeso-m_total)*g)*R1
     return torque_motor
 
 # Función para calcular la potencia del motor
 def calcular_potencia_motor(torque_motor, velocidad_angular):
     return torque_motor * velocidad_angular * eficiencia_real
 
-# Cálculos
-a = calcular_aceleracion(m_cabina, m_contrapeso, g, I1, I2, R1, R2)
-v0 = 0  # velocidad inicial (m/s)
-x0 = 0  # posición inicial (m)
-
-tiempos = np.linspace(0, t_max, 100)
+tiempos = np.linspace(0, calcular_tiempo(a, h_max), 100)
 velocidades = [calcular_velocidad_tiempo(v0, a, t) for t in tiempos]
 posiciones = [calcular_posicion_tiempo(x0, v0, a, t) for t in tiempos]
 omega1_tiempos = [v / R1 for v in velocidades]
@@ -91,6 +92,7 @@ print("Torque requerido por el motor : {:.2f} N*m".format(torque_motor))
 print("Velocidad media del sistema: {:.2f} m/s".format(v_media))
 print("Velocidad angular media de la polea conectada al motor: {:.2f} rad/s".format(omega_media))
 print("Potencia basada en la velocidad media: {:.2f} W".format(potencia_media))
+print("Altura alcanzada: {:.2f} m".format(posiciones[-1]))
 
 
 # Visualización de resultados
@@ -122,6 +124,5 @@ plt.grid()
 
 plt.tight_layout()
 plt.show()
-
 
 #No resultó tan complicado como parecía :´)
