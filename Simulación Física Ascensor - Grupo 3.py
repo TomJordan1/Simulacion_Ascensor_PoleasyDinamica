@@ -42,7 +42,7 @@ g = 9.81  # aceleración de la gravedad (m/s^2)
 eficiencia_real = 0.8 # Eficiencia del motor
 t_max = 0 # tiempo máximo de simulación (s)
 h_max = 10.292 # altura máxima alcanzada por la simulación (m)
-a = 0.5 # aceleración aceptable del sistema (m/s2)
+a = 0.5 # aceleración aceptable del sistema
 v0 = 0  # velocidad inicial (m/s)
 x0 = 0  # posición inicial (m)
 
@@ -126,3 +126,4 @@ plt.tight_layout()
 plt.show()
 
 #No resultó tan complicado como parecía :´)
+
